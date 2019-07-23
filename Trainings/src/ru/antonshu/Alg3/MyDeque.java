@@ -9,8 +9,8 @@ public class MyDeque<Item> {
     private int items;
 
 
-    public MyDeque(int s){
-        maxIndex = s;
+    public MyDeque(int size){
+        maxIndex = size;
         minIndex = 0;
         array = (Item[]) new Object[maxIndex];
         front = maxIndex;
@@ -44,27 +44,43 @@ public class MyDeque<Item> {
     }
 
     private void removeRight(){
-        if (array.length > 1 ) {
-            Item temp = array[front++];
+        if (array.length > 0 ) {
+            Item temp = getLastElement();/*array[front++];*/
             array[maxIndex - 1] = null;
             if (front == maxIndex)
                 front = 0;
             items--;
             reCapasityRight(-1);
         } else {
-            System.out.println("Удаление запрещено. Нельзя удалять единственный элемент");
+            System.out.println("Удаление запрещено. Элементов не осталось.");
         }
     }
     private void removeLeft(){
-        if (array.length > 1) {
-            Item temp = array[rear--];
+        if (array.length > 0) {
+            Item temp = getFirstElement();/*array[rear--];*/
             array[minIndex] = null;
             if (rear == minIndex)
                 rear = 0;
             items--;
             reCapasityLeft(-1);
         } else {
-            System.out.println("Удаление запрещено. Нельзя удалять единственный элемент");
+            System.out.println("Удаление запрещено. Элементов не осталось.");
+        }
+    }
+
+    Item getFirstElement() {
+        if (!isEmpty()) {
+            return array[minIndex];
+        } else {
+            return null;
+        }
+    }
+
+    Item getLastElement() {
+        if (!isEmpty()) {
+            return array[maxIndex-1];
+        } else {
+            return null;
         }
     }
 
