@@ -12,6 +12,10 @@ public class Bag {
         this.capacity = capacity;
     }
 
+    public Bag(Box[] boxes) {
+        this.boxArray = boxes;
+    }
+
     public int getMaxCost() {
         return maxCost;
     }
@@ -67,6 +71,18 @@ public class Bag {
         return Math.max(recursiveComputingMaxCost(boxes), recursiveComputingMaxCost(rotate(boxes, 1)));
     }
 
+    public int findBestSum(int i, int volume) {
+        if (i < 0) {
+            return 0;
+        }
+        if (boxArray[i].getVolume() > volume) {
+            return findBestSum(i - 1, volume);
+        } else {
+            return Math.max(findBestSum(i - 1, volume),
+                    findBestSum(i - 1, volume - boxArray[i].getVolume()) + boxArray[i].getCost());
+        }
+    }
+
     Box[] rotate(Box[] boxes, int newSize) {
         int pos = boxes.length - newSize;
         Box temp = boxes[pos];
@@ -110,13 +126,13 @@ public class Bag {
         boxes[1] = new Box("Middle", 30, 90);
         boxes[2] = new Box("Small", 50, 100);
 
-        bag.setBoxArray(boxes);
+        Bag refactorBag = new Bag(boxes);
 
         System.out.println("Максимальная стоимость жадного метода: " + bag.computeMaxCost(boxes));
-        System.out.println("Максимальная стоимость рекурсии: " + bag.recursiveComputingMaxCost(boxes));
+        System.out.println("Максимальная стоимость рекурсии: " + refactorBag.findBestSum(boxes.length -1, 100));
 
 
-        System.out.println(raiseNumberToPower(15,2));
+        System.out.println("Возведение в степень: " + raiseNumberToPower(15,2));
     }
 
     private static long raiseNumberToPower(int number, int power) {
