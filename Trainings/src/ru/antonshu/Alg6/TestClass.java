@@ -21,7 +21,6 @@ public class TestClass {
 
     private static double balancedPercent(BinarySearchTree[] bstArray) {
         int balancedTrees = 0, notBalancedTrees = 0;
-        int total = bstArray.length;
         for (BinarySearchTree bstree : bstArray) {
             if (bstree.isBalancedTree()) {
                 balancedTrees++;
@@ -30,7 +29,7 @@ public class TestClass {
             }
         }
         System.out.println("Сбалансированных: " + balancedTrees);
-        System.out.println("Всего: " + total);
-        return ((double) balancedTrees / total) * 100;
+        System.out.println("Всего: " + bstArray.length);
+        return ((double) balancedTrees / bstArray.length) * 100;
     }
 }
