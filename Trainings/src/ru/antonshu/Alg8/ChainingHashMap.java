@@ -78,6 +78,7 @@ public class ChainingHashMap<Key, Value> {
             while(iterator.hasNext()) {
                 if(iterator.next().key.equals(key)) {
                     iterator.remove();
+                    size--;
                 }
             }
         }
