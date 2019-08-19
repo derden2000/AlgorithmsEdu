@@ -10,6 +10,9 @@ public class TestClass {
         myHashMap.put(4, "Four");
         myHashMap.put(4, "Five");
 
+//
+//
+//
         System.out.println("myHashMap: \n" + myHashMap);
 
         myHashMap.delete(2);
